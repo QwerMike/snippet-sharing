@@ -1,13 +1,13 @@
 <p align="center">
-<img src="http://icons-for-free.com/icon/download-art_brush_design_draw_drawing_icon-414855.png">
-<h1 align="center">Dr.Guess</h1>
+<h1 align="center">Snippet Sharing</h1>
 </p>
 
-*Draw and guess is a fun online multiplayer game where you draw or guess words. It is inspired by well known Pictionary game.*
+*Snippet Sharing is a service for sharing code/text snippets. It allows you to paste a text snippet, and then you can share the link to it with somebody.*
 
 ## Info
-Players enter the game and provide their nickname.
-Players can create a new game and share a link (or code) to this game for other players to join, or join an existing game via link or code.
+You can paste a text snippet, and then you will get two links.  
+First link allows you to modify and delete the snippet.  
+The second link grants only read-only access.
 
 ## Links
 - [Functional specifications][1]
