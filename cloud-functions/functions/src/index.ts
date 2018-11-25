@@ -8,7 +8,8 @@ function bodyToSnippet({ author, title, data, type }) {
         author: author || '',
         title: title || '',
         data,
-        type: type || 'text' };
+        type: type || 'text'
+    };
 }
 
 function getSnippetSnapshot(id) {
@@ -64,8 +65,6 @@ export const deleteSnippet = functions.https.onRequest((req, res) => {
         }
 
         const snapshot = await getSnippetSnapshot(id);
-        const proxySnippet = await admin.database().ref('readonlyProxy').
-            orderByChild('snippet').equalTo(id).once('value');
         if (snapshot.exists()) {
             await Promise.all([
                 admin.database().ref(snapshot.ref).remove(),
@@ -119,3 +118,27 @@ export const getSnippet = functions.https.onRequest((req, res) => {
     });
 });
 
+// PUT method to update snippet
+export const updateSnippet = functions.https.onRequest((req, res) => {
+    return cors(req, res, async () => {
+        if (req.method !== 'PUT') {
+            return res.status(405).header('Allow', 'GET').json({
+                message: 'Send a PUT request.'
+            });
+        }
+
+        const id = req.query.id;
+        if (!id) {
+            return res.status(400).json({
+                message: 'Search parameter "id" is required.'
+            });
+        }
+
+        const data = bodyToSnippet(req.body);
+        Object.keys(data).forEach(key => 
+            (data[key] === undefined || data[key] === null) && delete data[key]);
+        await admin.database().ref(`snippets/${id}`).update(data);
+        
+        return res.json({ message: "Successfully updated."});
+    });
+});
