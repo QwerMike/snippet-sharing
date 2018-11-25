@@ -75,15 +75,15 @@ class App extends Component {
     });
   }
 
-  setTheme(e) {
+  setTheme(value) {
     this.setState({
-      theme: e.target.value
+      theme: value
     });
   }
 
-  setMode(e) {
+  setMode(value) {
     this.setState({
-      mode: e.target.value
+      mode: value
     });
   }
 
@@ -93,9 +93,9 @@ class App extends Component {
     });
   }
 
-  setFontSize(e) {
+  setFontSize(value) {
     this.setState({
-      fontSize: parseInt(e.target.value, 10)
+      fontSize: parseInt(value, 10)
     });
   }
 
@@ -131,18 +131,16 @@ class App extends Component {
               <div className="field">
                 <label>Language:</label>
                 <p className="control">
-                  <DropdownButton title={this.state.mode}>
-                    <MenuItem
-                      name="mode"
-                      onChange={this.setMode}
-                      value={this.state.mode}
-                    >
-                      {languages.map(lang => (
-                        <option key={lang} value={lang}>
-                          {lang}
-                        </option>
-                      ))}
-                    </MenuItem>
+                  <DropdownButton
+                    title={this.state.mode}
+                    onSelect={this.setMode}>
+                    {languages.map(lang => (
+                      <MenuItem
+                        eventKey={lang}
+                        value={lang}>
+                        {lang}
+                      </MenuItem>
+                    ))}
                   </DropdownButton>
                 </p>
               </div>
@@ -150,18 +148,17 @@ class App extends Component {
               <div className="field">
                 <label>Theme:</label>
                 <p className="control">
-                  <DropdownButton title={this.state.theme}>
-                    <MenuItem
-                      name="theme"
-                      onChange={this.setTheme}
-                      value={this.state.theme}
-                    >
-                      {themes.map(lang => (
-                        <option key={lang} value={lang}>
-                          {lang}
-                        </option>
-                      ))}
-                    </MenuItem>
+                  <DropdownButton
+                    title={this.state.theme}
+                    onSelect={this.setTheme}>
+                    {themes.map(theme => (
+                      <MenuItem
+                        eventKey={theme}
+                        value={theme}
+                      >
+                        {theme}
+                      </MenuItem>
+                    ))}
                   </DropdownButton>
                 </p>
               </div>
@@ -169,18 +166,17 @@ class App extends Component {
               <div className="field">
                 <label>Font Size:</label>
                 <p className="control">
-                  <DropdownButton title={this.state.fontSize}>
-                    <MenuItem
-                      name="font"
-                      onChange={this.setFontSize}
-                      value={this.state.fontSize}
-                    >
-                      {[14, 16, 18, 20, 24, 28, 32, 40].map(lang => (
-                        <option key={lang} value={lang}>
-                          {lang}
-                        </option>
-                      ))}
-                    </MenuItem>
+                  <DropdownButton
+                    title={this.state.fontSize}
+                    onSelect={this.setFontSize}>
+                    {[14, 16, 18, 20, 24, 28, 32, 40].map(font => (
+                      <MenuItem
+                        eventKey={font}
+                        value={font}
+                      >
+                        {font}
+                      </MenuItem>
+                    ))}
                   </DropdownButton>
                 </p>
               </div>

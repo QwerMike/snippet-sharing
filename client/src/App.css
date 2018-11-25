@@ -1,5 +1,6 @@
 #brace-editor {
     min-width: 100% !important;
+    min-height: 85vh !important;
 }
 
 body {
@@ -31,6 +32,16 @@ body {
     color: #61dafb;
 }
 
+div.dropdown {
+    width: 150px;
+}
+
+.btn-group>.btn:first-child {
+    width: 100%;
+    background-color: dimgray;
+    color: whitesmoke;
+}
+
 .navbar .container {
     margin-left: 20px;
 }
@@ -54,8 +65,8 @@ body {
 }
 
 .switch-primary .switch-input:checked+.switch-slider {
-    background-color: #20a8d8;
-    border-color: #1985ac;
+    background-color: #15789c;
+    border-color: #3dcafd;
 }
 
 .switch-pill .switch-slider {
@@ -98,10 +109,13 @@ body {
     box-sizing: border-box;
 }
 
-*,
- ::after,
- ::before {
-    box-sizing: border-box;
+.switch-input:disabled~.switch-slider {
+    cursor: not-allowed;
+    opacity: .5;
+}
+
+input[type='checkbox']:checked .switch-slider::before {
+    transform: translate3d(26px, 0, 0);
 }
 
 @keyframes App-logo-spin {
