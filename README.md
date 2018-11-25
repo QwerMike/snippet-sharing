@@ -76,4 +76,14 @@ They provide metrics for:
 - Cloud Functions.
 
 ## Telemetry
-Google Analytics.
+We use Application Insights ([react-appinsights][4]), which provides us with:
+* Request rates, response times, and failure rates - which pages are most popular, at what times of day, see which pages perform best;
+* Dependency rates, response times, and failure rates - check if external services are slowing down our app;
+* Exceptions - both server and browser exceptions are reported;
+* Page views and load performance - reported by users' browsers;
+* AJAX calls from web pages - rates, response times, and failure rates;
++ React-specific metrics:
+* Tracking of router changes;
+* React components usage statistics.
+
+[4]: https://github.com/Azure/react-appinsights
