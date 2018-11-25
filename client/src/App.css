@@ -32,6 +32,15 @@ body {
     color: #61dafb;
 }
 
+span img {
+    margin-top: -5px;
+    margin-right: 10px;
+}
+
+img.image {
+    margin: 20px;
+}
+
 div.dropdown {
     width: 150px;
 }
@@ -116,6 +125,11 @@ div.dropdown {
 
 input[type='checkbox']:checked .switch-slider::before {
     transform: translate3d(26px, 0, 0);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
 }
 
 @keyframes App-logo-spin {

@@ -9,8 +9,11 @@ class Navigation extends Component {
           <Navbar.Header>
             <Navbar.Brand>
               <Link to="/">
+              <span>
+                <img src='./snippets-hero-icon.png' alt='snippet share logo' width='30px' height='30px'/>
+              </span>
                 Snippet Share
-                       </Link>
+              </Link>
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
@@ -18,7 +21,7 @@ class Navigation extends Component {
             <Nav>
               <NavItem eventKey={1} href="/about">
                 About
-                      </NavItem>
+              </NavItem>
             </Nav>
           </Navbar.Collapse>
         </Navbar>
