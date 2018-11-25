@@ -1,5 +1,16 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
+import {
+  Button,
+  ButtonGroup,
+  Grid,
+  Row,
+  Col,
+  DropdownButton,
+  MenuItem,
+  Glyphicon,
+  ButtonToolbar
+} from "react-bootstrap";
 import * as actions from "../apiQueries/queries";
 
 import "brace/mode/jsx";
@@ -74,12 +85,14 @@ class Editor extends Component {
     this.setBoolean = this.setBoolean.bind(this);
 
     const id = this.props.match.params.id;
-    if (id) {
-      this.getSnippet(id);
-    }
+    if (id) this.getSnippet(id);
   }
 
-  componentDidMount() {}
+  setMode(e) {
+    this.setState({
+      mode: e
+    });
+  }
 
   onChange(newValue) {
     this.setState({
@@ -89,13 +102,7 @@ class Editor extends Component {
 
   setTheme(e) {
     this.setState({
-      theme: e.target.value
-    });
-  }
-
-  setMode(e) {
-    this.setState({
-      mode: e.target.value
+      theme: e
     });
   }
 
@@ -107,7 +114,7 @@ class Editor extends Component {
 
   setFontSize(e) {
     this.setState({
-      fontSize: parseInt(e.target.value, 10)
+      fontSize: parseInt(e, 10)
     });
   }
 
@@ -135,7 +142,6 @@ class Editor extends Component {
   }
 
   async getSnippet(id) {
-    console.log(id);
     const response = await actions.getSnippetById(id);
     this.setState = {
       value: response.snippet.data,
@@ -161,120 +167,140 @@ class Editor extends Component {
 
   render() {
     return (
-      <div className="columns">
-        <div className="column">
-          <div className="field">
-            <label>Mode:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="mode"
-                  onChange={this.setMode}
-                  value={this.state.mode}
+      <Grid className={"content"}>
+        <Row>
+          <Col xs={12} md={9}>
+            <ButtonToolbar>
+              <ButtonGroup bsSize="small" className="actionBtns pull-right">
+                <Button bsStyle="info">
+                  <Glyphicon glyph="glyphicon glyphicon-share-alt" />
+                </Button>
+                <Button bsStyle="primary">
+                  <Glyphicon glyph="glyphicon glyphicon-floppy-disk" />
+                </Button>
+                <Button bsStyle="danger">
+                  <Glyphicon glyph="glyphicon glyphicon-remove" />
+                </Button>
+              </ButtonGroup>
+            </ButtonToolbar>
+            <AceEditor
+              mode={this.state.mode}
+              theme={this.state.theme}
+              onChange={this.onChange}
+              value={this.state.value}
+              fontSize={this.state.fontSize}
+              showPrintMargin={this.state.showPrintMargin}
+              showGutter={this.state.showGutter}
+              highlightActiveLine={this.state.highlightActiveLine}
+              setOptions={{
+                enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+                enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+                enableSnippets: this.state.enableSnippets,
+                showLineNumbers: this.state.showLineNumbers,
+                tabSize: 2
+              }}
+            />
+          </Col>
+          <Col xs={12} md={3}>
+            <div>
+              <h2>Settings</h2>
+            </div>
+            <div className="field">
+              <label>Language:</label>
+              <div className="control">
+                <DropdownButton
+                  id="lanuage"
+                  title={this.state.mode}
+                  onSelect={this.setMode}
                 >
                   {languages.map(lang => (
-                    <option key={lang} value={lang}>
+                    <MenuItem eventKey={lang} key={lang} value={lang}>
                       {lang}
-                    </option>
+                    </MenuItem>
                   ))}
-                </select>
-              </span>
-            </p>
-          </div>
+                </DropdownButton>
+              </div>
+            </div>
 
-          <div className="field">
-            <label>Theme:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="Theme"
-                  onChange={this.setTheme}
-                  value={this.state.theme}
+            <div className="field">
+              <label>Theme:</label>
+              <div className="control">
+                <DropdownButton
+                  id="theme"
+                  title={this.state.theme}
+                  onSelect={this.setTheme}
                 >
-                  {themes.map(lang => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
+                  {themes.map(theme => (
+                    <MenuItem eventKey={theme} key={theme} value={theme}>
+                      {theme}
+                    </MenuItem>
                   ))}
-                </select>
-              </span>
-            </p>
-          </div>
+                </DropdownButton>
+              </div>
+            </div>
 
-          <div className="field">
-            <label>Font Size:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="Font Size"
-                  onChange={this.setFontSize}
-                  value={this.state.fontSize}
+            <div className="field">
+              <label>Font Size:</label>
+              <div className="control">
+                <DropdownButton
+                  id="fontSize"
+                  title={this.state.fontSize}
+                  onSelect={this.setFontSize}
                 >
-                  {[14, 16, 18, 20, 24, 28, 32, 40].map(lang => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
+                  {[14, 16, 18, 20, 24, 28, 32, 40].map(font => (
+                    <MenuItem eventKey={font} key={font} value={font}>
+                      {font}
+                    </MenuItem>
                   ))}
-                </select>
-              </span>
-            </p>
-          </div>
+                </DropdownButton>
+              </div>
+            </div>
 
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={this.state.enableLiveAutocompletion}
-                  onChange={e =>
-                    this.setBoolean(
-                      "enableLiveAutocompletion",
-                      e.target.checked
-                    )
-                  }
-                />
-                Enable Live Autocomplete
-              </label>
-            </p>
-          </div>
+            <div className="field">
+              <div className="control">
+                <span>
+                  <label className="switch switch-pill switch-primary">
+                    <input
+                      type="checkbox"
+                      className="switch-input"
+                      checked={this.state.enableLiveAutocompletion}
+                      onChange={e =>
+                        this.setBoolean(
+                          "enableLiveAutocompletion",
+                          e.target.checked
+                        )
+                      }
+                    />
+                    <span className={"switch-slider"} />
+                  </label>
+                </span>
+                <label className={"switch-label"}>
+                  Enable Live Autocomplete
+                </label>
+              </div>
+            </div>
 
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={this.state.enableSnippets}
-                  onChange={e =>
-                    this.setBoolean("enableSnippets", e.target.checked)
-                  }
-                />
-                Enable Snippets
-              </label>
-            </p>
-          </div>
-        </div>
-
-        <div className="examples column">
-          <AceEditor
-            mode={this.state.mode}
-            theme={this.state.theme}
-            onChange={this.onChange}
-            value={this.state.value}
-            fontSize={this.state.fontSize}
-            showPrintMargin={this.state.showPrintMargin}
-            showGutter={this.state.showGutter}
-            highlightActiveLine={this.state.highlightActiveLine}
-            readOnly={this.state.readOnly}
-            setOptions={{
-              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-              enableSnippets: this.state.enableSnippets,
-              showLineNumbers: this.state.showLineNumbers,
-              tabSize: 2
-            }}
-          />
-        </div>
-      </div>
+            <div className="field">
+              <div className="control">
+                <span>
+                  <label className="switch switch-pill switch-primary">
+                    <input
+                      type="checkbox"
+                      className="switch-input"
+                      checked={this.state.enableSnippets}
+                      onChange={e =>
+                        this.setBoolean("enableSnippets", e.target.checked)
+                      }
+                    />
+                    <span className={"switch-slider"} />
+                  </label>
+                </span>
+                <label className={"switch-label"}>Enable Snippets</label>
+              </div>
+            </div>
+          </Col>
+        </Row>
+      </Grid>
     );
   }
 }

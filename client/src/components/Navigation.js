@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { Nav, Navbar, NavItem } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Navigation extends Component {
   render() {
@@ -8,7 +8,17 @@ class Navigation extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <Navbar.Brand>
-            <Link to="/">Snippet Share</Link>
+            <Link to="/">
+              <span>
+                <img
+                  src="./snippets-hero-icon.png"
+                  alt="snippet share logo"
+                  width="30px"
+                  height="30px"
+                />
+              </span>
+              Snippet Share
+            </Link>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
