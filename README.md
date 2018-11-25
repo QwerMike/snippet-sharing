@@ -18,10 +18,27 @@ The second link grants only read-only access.
 [2]: https://github.com/QwerMike/dr-guess/blob/master/docs/architecture.md
 [3]: https://github.com/QwerMike/dr-guess/blob/master/docs/solid-compliant.md
 
+## Storage
+For storage we use Firebase Realtime Database, which:
+* is cloud-hosted;
+* NoSQL;
+* always up-to-date, as data is synced across all clients in realtime;
+* remains available even if the app goes offline;
+* is available from client devices - can be accessed directly from a mobile device or web browser;
+* has data validation through the Firebase Realtime Database Security Rules on r/w operations;
+* scales across multiple database instances.
+
+We store snippets, which have:
+* data - text or code, which cannot be empty;
+* title - optional title for the snippet;
+* author - optional author of the snippet;
+* type - the type of text or code set by the author (currently supports most popular programming and markup languages);
+* public_id - unique identifier, which grants view-only access to the snippet;
+* private_id - unique identifier, which grants full access to the snippet.
+
 ## Resiliency
 There are four endpoints in the API, conforming to basic CRUD operations.
-Each snippet has a value, title, author and type.
-Snippets can be viewed with readonly or edit rights.
+Snippets can be viewed with read only or edit rights.
 All endpoints have their timeout set to sixty seconds.
 All errors are handled properly on the client side.
 
