@@ -73,6 +73,37 @@ body {
     border-radius: .25rem;
 }
 
+.switch-pill .switch-slider::before {
+    border-radius: 50em;
+}
+
+.switch-slider::before {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    content: "";
+    background-color: #fff;
+    border: 1px solid #c8ced3;
+    transition: .15s ease-out;
+    border-radius: .125rem;
+}
+
+:after,
+ :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*,
+ ::after,
+ ::before {
+    box-sizing: border-box;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
