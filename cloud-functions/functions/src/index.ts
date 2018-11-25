@@ -10,6 +10,10 @@ function bodyToSnippet({ author, title, data, type }) {
         type: type || 'text' };
 }
 
+function getSnippetSnapshot(id) {
+    return admin.database().ref(`snippets/${id}`).once('value');
+}
+
 export const ping = functions.https.onRequest((req, res) => {
     res.send('Successfully pinged!\n\n');
 });
@@ -52,7 +56,7 @@ export const deleteSnippet = functions.https.onRequest(async (req, res) => {
         });
     }
 
-    const snapshot = await admin.database().ref(`snippets/${id}`).once('value');
+    const snapshot = await getSnippetSnapshot(id);
     const proxySnippet = await admin.database().ref('readonlyProxy').
         orderByChild('snippet').equalTo(id).once('value');
     if (snapshot.exists()) {
@@ -69,5 +73,40 @@ export const deleteSnippet = functions.https.onRequest(async (req, res) => {
         return res.status(404).json({
             message: `Snippet ${id} is not found.`
         });
+    }
+});
+
+// GET method to get snippet
+export const getSnippet = functions.https.onRequest(async (req, res) => {
+    if (req.method !== 'GET') {
+        return res.status(405).header('Allow', 'GET').json({
+            message: 'Send a GET request.'
+        });
+    }
+
+    const id = req.query.id;
+    if (!id) {
+        return res.status(400).json({
+            message: 'Search parameter "id" is required.'
+        });
+    }
+
+    const snapshot = await getSnippetSnapshot(id);
+    if (snapshot.exists()) {
+        return res.json({
+            snippet: snapshot.val(),
+            readonly: false
+        });
+    } else {
+        const proxySnapshot = await 
+            admin.database().ref(`readonlyProxy/${id}`).once('value');
+        return proxySnapshot.exists()
+            ? res.json({
+                snippet: await getSnippetSnapshot(proxySnapshot.val().snippet),
+                readonly: true
+            })
+            : res.status(404).json({
+                message: `Snippet ${id} is not found.`
+            });
     }
 });
