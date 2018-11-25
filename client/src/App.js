@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
+import {Nav, Navbar, NavItem} from "react-bootstrap"
 import "brace/mode/jsx";
 import "brace/ext/language_tools";
 import "brace/ext/searchbox";
@@ -100,6 +101,7 @@ class App extends Component {
 
   render() {
     return (
+      <div><Navigation></Navigation>
       <div className="columns">
         <div className="column">
           <div className="field">
@@ -213,8 +215,29 @@ class App extends Component {
           />
         </div>
       </div>
-    );
+      </div>);
   }
 }
 
 export default App;
+
+function Navigation(props) {
+  return (
+  <Navbar inverse collapseOnSelect>
+    <Navbar.Header>
+      <Navbar.Brand>
+        <a href="#brand">
+          Snippet Share
+        </a>
+      </Navbar.Brand>
+      <Navbar.Toggle />
+    </Navbar.Header>
+    <Navbar.Collapse>
+      <Nav>
+        <NavItem eventKey={1} href="#">
+          About
+      </NavItem>
+      </Nav>
+    </Navbar.Collapse>
+  </Navbar>)
+}
