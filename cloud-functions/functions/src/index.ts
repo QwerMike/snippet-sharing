@@ -134,11 +134,24 @@ export const updateSnippet = functions.https.onRequest((req, res) => {
             });
         }
 
+        const snippet = await admin.database().ref(`snippets/${id}`).once('value');
+        if (!snippet.exists()) {
+            return res.status(404).json({
+                message: `Snippet ${id} is not found.`
+            });
+        }
+
         const data = bodyToSnippet(req.body);
+        if (!data.data) {
+            return res.status(400).json({
+                message: 'Property "data" is required.'
+            });
+        }
+
         Object.keys(data).forEach(key => 
             (data[key] === undefined || data[key] === null) && delete data[key]);
         await admin.database().ref(`snippets/${id}`).update(data);
-        
-        return res.json({ message: "Successfully updated."});
+
+        return res.json({ message: `Successfully updated snippet ${id}.`});
     });
 });
