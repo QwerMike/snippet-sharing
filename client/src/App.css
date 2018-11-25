@@ -3,6 +3,10 @@
     min-height: 85vh !important;
 }
 
+#wooopsBtn {
+    justify-content: center
+}
+
 body {
     background-color: #282c34;
     color: whitesmoke;
