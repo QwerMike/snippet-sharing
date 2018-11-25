@@ -20,16 +20,14 @@ class App extends Component {
             <Route path="/snippet/:id" component={Editor} />
             <Route path="/about" component={About} />
             <Route path="/*" component={Wooops} />
-            <Route render={() => <h1>404 Error</h1>} />
           </Switch>
           </div>
-        <footer>
+          <footer>
             <nav>
-                <ul>
-                </ul>
+              <ul />
             </nav>
             <div>© 2018 SnippetShare.org</div>
-        </footer>
+          </footer>
         </div>
       </Router>
     );
