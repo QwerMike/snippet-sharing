@@ -1,5 +1,5 @@
-const functions = require('firebase-functions');
-const admin = require('firebase-admin');
+import * as functions from 'firebase-functions';
+import * as admin from 'firebase-admin';
 admin.initializeApp();
 
 function bodyToSnippet({ author, title, data, type }) {
@@ -10,11 +10,12 @@ function bodyToSnippet({ author, title, data, type }) {
         type: type || 'text' };
 }
 
-exports.ping = functions.https.onRequest(async (req, res) => {
+export const ping = functions.https.onRequest((req, res) => {
     res.send('Successfully pinged!\n\n');
 });
 
-exports.createSnippet = functions.https.onRequest((req, res) => {
+// POST method to create snippet
+export const createSnippet = functions.https.onRequest((req, res) => {
     if (req.method != 'POST') {
         return res.status(405).header('Allow', 'POST').json({
             message: 'Send a POST request.'
@@ -33,5 +34,5 @@ exports.createSnippet = functions.https.onRequest((req, res) => {
         'snippet': privateUid
     }).key;
 
-    res.json({ privateUid, publicUid });
+    return res.json({ privateUid, publicUid });
 });
