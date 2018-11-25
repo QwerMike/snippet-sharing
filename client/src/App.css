@@ -39,6 +39,40 @@ body {
     width: 100%;
 }
 
+.switch-pill {
+    padding-top: 14px;
+}
+
+.switch {
+    display: inline-block;
+    width: 40px;
+    height: 26px;
+}
+
+.switch-input {
+    display: none;
+}
+
+.switch-primary .switch-input:checked+.switch-slider {
+    background-color: #20a8d8;
+    border-color: #1985ac;
+}
+
+.switch-pill .switch-slider {
+    border-radius: 50em;
+}
+
+.switch-slider {
+    position: relative;
+    display: block;
+    height: inherit;
+    cursor: pointer;
+    background-color: #a6a6a6;
+    border: 1px solid #fff;
+    transition: .15s ease-out;
+    border-radius: .25rem;
+}
+
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
