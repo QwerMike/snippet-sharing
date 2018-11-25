@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
-import {Nav, Navbar, NavItem} from "react-bootstrap"
+import {Nav, Navbar, NavItem, Grid, Row, Col} from "react-bootstrap"
 import "brace/mode/jsx";
 import "brace/ext/language_tools";
 import "brace/ext/searchbox";
@@ -101,121 +101,135 @@ class App extends Component {
 
   render() {
     return (
-      <div><Navigation></Navigation>
-      <div className="columns">
-        <div className="column">
-          <div className="field">
-            <label>Mode:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="mode"
-                  onChange={this.setMode}
-                  value={this.state.mode}
-                >
-                  {languages.map(lang => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </p>
-          </div>
+      <div>
+        <Navigation/>
+        <Grid className={'content'}>
+          <Row>
+            <Col xs={12} md={9} >
+              <AceEditor className={'editor'}
+                mode={this.state.mode}
+                theme={this.state.theme}
+                onChange={this.onChange}
+                value={this.state.value}
+                fontSize={this.state.fontSize}
+                showPrintMargin={this.state.showPrintMargin}
+                showGutter={this.state.showGutter}
+                highlightActiveLine={this.state.highlightActiveLine}
+                setOptions={{
+                  enableBasicAutocompletion: this.state.enableBasicAutocompletion,
+                  enableLiveAutocompletion: this.state.enableLiveAutocompletion,
+                  enableSnippets: this.state.enableSnippets,
+                  showLineNumbers: this.state.showLineNumbers,
+                  tabSize: 2
+                }}
+              />
+            </Col>
+            <Col xs={12} md={3} >
+              <div>
+                <h2>Settings</h2>
+              </div>
+              <div className="field">
+                <label>Mode:</label>
+                <p className="control">
+                  <span className="select">
+                    <select
+                      name="mode"
+                      onChange={this.setMode}
+                      value={this.state.mode}
+                    >
+                      {languages.map(lang => (
+                        <option key={lang} value={lang}>
+                          {lang}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                </p>
+              </div>
 
-          <div className="field">
-            <label>Theme:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="Theme"
-                  onChange={this.setTheme}
-                  value={this.state.theme}
-                >
-                  {themes.map(lang => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </p>
-          </div>
+              <div className="field">
+                <label>Theme:</label>
+                <p className="control">
+                  <span className="select">
+                    <select
+                      name="Theme"
+                      onChange={this.setTheme}
+                      value={this.state.theme}
+                    >
+                      {themes.map(lang => (
+                        <option key={lang} value={lang}>
+                          {lang}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                </p>
+              </div>
 
-          <div className="field">
-            <label>Font Size:</label>
-            <p className="control">
-              <span className="select">
-                <select
-                  name="Font Size"
-                  onChange={this.setFontSize}
-                  value={this.state.fontSize}
-                >
-                  {[14, 16, 18, 20, 24, 28, 32, 40].map(lang => (
-                    <option key={lang} value={lang}>
-                      {lang}
-                    </option>
-                  ))}
-                </select>
-              </span>
-            </p>
-          </div>
+              <div className="field">
+                <label>Font Size:</label>
+                <p className="control">
+                  <span className="select">
+                    <select
+                      name="Font Size"
+                      onChange={this.setFontSize}
+                      value={this.state.fontSize}
+                    >
+                      {[14, 16, 18, 20, 24, 28, 32, 40].map(lang => (
+                        <option key={lang} value={lang}>
+                          {lang}
+                        </option>
+                      ))}
+                    </select>
+                  </span>
+                </p>
+              </div>
 
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={this.state.enableLiveAutocompletion}
-                  onChange={e =>
-                    this.setBoolean(
-                      "enableLiveAutocompletion",
-                      e.target.checked
-                    )
-                  }
-                />
-                Enable Live Autocomplete
-              </label>
-            </p>
-          </div>
+              <div className="field">
+                <p className="control">
+                  <span>
+                    <label className="switch switch-pill switch-primary">
+                      <input type="checkbox" className="switch-input"
+                        checked={this.state.enableLiveAutocompletion}
+                        onChange={e =>
+                          this.setBoolean(
+                            "enableLiveAutocompletion",
+                            e.target.checked
+                          )
+                        }
+                      />
+                      <span className={'switch-slider'}></span>
+                    </label>
+                  </span>
+                  <label className={'switch-label'}>Enable Live Autocomplete</label>
+                </p>
+              </div>
 
-          <div className="field">
-            <p className="control">
-              <label className="checkbox">
-                <input
-                  type="checkbox"
-                  checked={this.state.enableSnippets}
-                  onChange={e =>
-                    this.setBoolean("enableSnippets", e.target.checked)
-                  }
-                />
-                Enable Snippets
-              </label>
-            </p>
+              <div className="field">
+                <p className="control">
+                  <span>
+                    <label className="switch switch-pill switch-primary">
+                      <input type="checkbox" className="switch-input"
+                        checked={this.state.enableSnippets}
+                        onChange={e =>
+                          this.setBoolean("enableSnippets", e.target.checked)
+                        }
+                      />
+                      <span className={'switch-slider'}></span>
+                    </label>
+                  </span>
+                  <label className={'switch-label'}>Enable Snippets</label>
+                </p>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
+        <div className="columns">
+          <div className="examples column">
+
           </div>
         </div>
-
-        <div className="examples column">
-          <AceEditor
-            mode={this.state.mode}
-            theme={this.state.theme}
-            onChange={this.onChange}
-            value={this.state.value}
-            fontSize={this.state.fontSize}
-            showPrintMargin={this.state.showPrintMargin}
-            showGutter={this.state.showGutter}
-            highlightActiveLine={this.state.highlightActiveLine}
-            setOptions={{
-              enableBasicAutocompletion: this.state.enableBasicAutocompletion,
-              enableLiveAutocompletion: this.state.enableLiveAutocompletion,
-              enableSnippets: this.state.enableSnippets,
-              showLineNumbers: this.state.showLineNumbers,
-              tabSize: 2
-            }}
-          />
-        </div>
-      </div>
-      </div>);
+      </div >);
   }
 }
 
