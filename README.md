@@ -24,10 +24,11 @@ Each snippet has a value, title, author and type.
 Snippets can be viewed with readonly or edit rights.
 All endpoints have their timeout set to sixty seconds.
 All errors are handled properly on the client side.
-| Endpoint | Reciliency |
-|---|---|
-| createSnippet  | error if no value is in the request body  |
-| getSnippet     | error if no snippet with that id  |
+
+|    Endpoint    |                       Resiliency                     |
+| -------------- |:----------------------------------------------------:|
+| createSnippet  | error if no value is in the request body             |
+| getSnippet     | error if no snippet with that id                     |
 | updateSnippet  | error if no snippet with edit permission by that id  |
 | deleteSnippet  | error if no snippet with edit permission by that id  |
 
