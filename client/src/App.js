@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
-import {Nav, Navbar, NavItem, Grid, Row, Col} from "react-bootstrap"
+import { Nav, Navbar, NavItem, Grid, Row, Col, DropdownButton, MenuItem } from "react-bootstrap"
 import "brace/mode/jsx";
 import "brace/ext/language_tools";
 import "brace/ext/searchbox";
@@ -102,11 +102,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navigation/>
+        <Navigation />
         <Grid className={'content'}>
           <Row>
             <Col xs={12} md={9} >
-              <AceEditor className={'editor'}
+              <AceEditor
                 mode={this.state.mode}
                 theme={this.state.theme}
                 onChange={this.onChange}
@@ -129,10 +129,10 @@ class App extends Component {
                 <h2>Settings</h2>
               </div>
               <div className="field">
-                <label>Mode:</label>
+                <label>Language:</label>
                 <p className="control">
-                  <span className="select">
-                    <select
+                  <DropdownButton title={this.state.mode}>
+                    <MenuItem
                       name="mode"
                       onChange={this.setMode}
                       value={this.state.mode}
@@ -142,17 +142,17 @@ class App extends Component {
                           {lang}
                         </option>
                       ))}
-                    </select>
-                  </span>
+                    </MenuItem>
+                  </DropdownButton>
                 </p>
               </div>
 
               <div className="field">
                 <label>Theme:</label>
                 <p className="control">
-                  <span className="select">
-                    <select
-                      name="Theme"
+                  <DropdownButton title={this.state.theme}>
+                    <MenuItem
+                      name="theme"
                       onChange={this.setTheme}
                       value={this.state.theme}
                     >
@@ -161,17 +161,17 @@ class App extends Component {
                           {lang}
                         </option>
                       ))}
-                    </select>
-                  </span>
+                    </MenuItem>
+                  </DropdownButton>
                 </p>
               </div>
 
               <div className="field">
                 <label>Font Size:</label>
                 <p className="control">
-                  <span className="select">
-                    <select
-                      name="Font Size"
+                  <DropdownButton title={this.state.fontSize}>
+                    <MenuItem
+                      name="font"
                       onChange={this.setFontSize}
                       value={this.state.fontSize}
                     >
@@ -180,8 +180,8 @@ class App extends Component {
                           {lang}
                         </option>
                       ))}
-                    </select>
-                  </span>
+                    </MenuItem>
+                  </DropdownButton>
                 </p>
               </div>
 
@@ -237,21 +237,21 @@ export default App;
 
 function Navigation(props) {
   return (
-  <Navbar inverse collapseOnSelect>
-    <Navbar.Header>
-      <Navbar.Brand>
-        <a href="#brand">
-          Snippet Share
+    <Navbar inverse collapseOnSelect>
+      <Navbar.Header>
+        <Navbar.Brand>
+          <a href="#brand">
+            Snippet Share
         </a>
-      </Navbar.Brand>
-      <Navbar.Toggle />
-    </Navbar.Header>
-    <Navbar.Collapse>
-      <Nav>
-        <NavItem eventKey={1} href="#">
-          About
+        </Navbar.Brand>
+        <Navbar.Toggle />
+      </Navbar.Header>
+      <Navbar.Collapse>
+        <Nav>
+          <NavItem eventKey={1} href="#">
+            About
       </NavItem>
-      </Nav>
-    </Navbar.Collapse>
-  </Navbar>)
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>)
 }
