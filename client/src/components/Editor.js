@@ -98,7 +98,7 @@ class Editor extends Component {
 
     setFontSize(e) {
         this.setState({
-            fontSize: parseInt(e.target.value, 10)
+            fontSize: parseInt(e, 10)
         });
     }
 
