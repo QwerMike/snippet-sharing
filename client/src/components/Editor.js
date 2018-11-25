@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace"; 
-import { Nav, Navbar, NavItem, Grid, Row, Col, DropdownButton, MenuItem } from "react-bootstrap";
+import { Button, ButtonGroup, Grid, Row, Col, DropdownButton, MenuItem, Glyphicon, ButtonToolbar } from "react-bootstrap";
 
 import "brace/mode/jsx";
 import "brace/ext/language_tools";
@@ -107,6 +107,19 @@ class Editor extends Component {
             <Grid className={'content'}>
                 <Row>
                     <Col xs={12} md={9} >
+                    <ButtonToolbar>
+                        <ButtonGroup bsSize='small' className='actionBtns pull-right'>
+                            <Button bsStyle="info">
+                                <Glyphicon glyph="glyphicon glyphicon-share-alt"/>
+                            </Button>
+                            <Button bsStyle="primary">
+                                <Glyphicon glyph="glyphicon glyphicon-floppy-disk" />
+                            </Button>
+                            <Button bsStyle='danger'>
+                                <Glyphicon glyph="glyphicon glyphicon-remove" />                                
+                            </Button>
+                        </ButtonGroup>
+                    </ButtonToolbar>
                         <AceEditor
                             mode={this.state.mode}
                             theme={this.state.theme}
