@@ -9,7 +9,8 @@ import {
   DropdownButton,
   MenuItem,
   Glyphicon,
-  ButtonToolbar
+  ButtonToolbar,
+  Modal
 } from "react-bootstrap";
 import * as actions from "../apiQueries/queries";
 
@@ -74,7 +75,8 @@ class Editor extends Component {
       highlightActiveLine: true,
       enableSnippets: false,
       showLineNumbers: true,
-      currentId: this.props.match.params.id ? this.props.match.params.id : null
+      currentId: this.props.match.params.id ? this.props.match.params.id : null,
+      show: false
     };
 
     this.setTheme = this.setTheme.bind(this);
@@ -122,7 +124,10 @@ class Editor extends Component {
   }
 
   async createSnippet() {
-    const { value, mode, author, title } = this.state;
+      
+      if(!this.state.currentId)
+    {
+        const { value, mode, author, title } = this.state;
     const createdSnippet = {
       data: value,
       type: mode,
@@ -136,17 +141,23 @@ class Editor extends Component {
       this.setState({
         privateUid: privateUid,
         publicLink: publicUid,
-        currentId: privateUid ? privateUid : publicUid
+        currentId: privateUid ? privateUid : publicUid,
       });
-      const obj = this.generateUrls(privateUid, publicUid);
-      alert(`${obj.privateURL}\n${obj.publicURL}`);
-    }
+    }}
+      this.setState({
+        privateUid: this.state.privateUid,
+        publicLink: this.state.publicLink,
+        show: true
+    })
   }
 
-  generateUrls(privateUid, publicUid) {
-    const privateUrl = window.location.href.concat(`/snippet/${privateUid}`);
-    const publicUrl = window.location.href.concat(`/snippet/${publicUid}`);
-    return { privateURL: privateUrl, publicURL: publicUrl };
+  handleHide() {
+    this.setState({ show: false });
+  }
+
+  generateUrl(Uid) {
+    const url = window.location.host.concat(`/snippet/${Uid}`);
+    return url;
   }
 
   async getSnippet(id) {
@@ -156,7 +167,10 @@ class Editor extends Component {
       mode: response.snippet.type,
       title: response.snippet.title,
       author: response.snippet.author,
-      readOnly: response.readonly
+      readOnly: response.readonly,
+      privateUid: response.readonly ? undefined : id,
+      publicLink: response.snippet.publicUid,
+      currentId: id
     });
   }
 
@@ -188,6 +202,7 @@ class Editor extends Component {
 
   render() {
     return (
+        <div>
       <Grid className={"content"}>
         <Row>
           <Col xs={12} md={9}>
@@ -331,6 +346,33 @@ class Editor extends Component {
           </Col>
         </Row>
       </Grid>
+      <Modal
+          show={this.state.show}
+          onHide={() => this.handleHide()}
+          container={this}
+          aria-labelledby="contained-modal-title"
+          className="modal"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title">
+              Enjoy your links
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h4>
+                Editable Link: 
+            </h4>
+            <p>{this.generateUrl(this.state.privateUid)}</p>
+            <h4>
+                Read-only Link: 
+            </h4>
+            <p>{this.generateUrl(this.state.publicLink)}</p>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={() => this.handleHide()}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
     );
   }
 }

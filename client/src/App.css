@@ -1,151 +1,155 @@
 #brace-editor {
-  min-width: 100% !important;
-  min-height: 85vh !important;
+    min-width: 100% !important;
+    min-height: 85vh !important;
 }
 
-#wooopsBtn {
-    justify-content: center
+.modal {
+    color: #282828;
 }
 
 body {
-  background-color: #282c34;
-  color: whitesmoke;
+    background-color: #282c34;
+    color: whitesmoke;
 }
 
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+    animation: App-logo-spin infinite 20s linear;
+    height: 40vmin;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 span img {
-  margin-top: -5px;
-  margin-right: 10px;
+    margin-top: -5px;
+    margin-right: 10px;
 }
 
 img.image {
-  margin: 20px;
+    margin: 20px;
 }
 
 div.field {
-  margin: 20px 0;
+    margin: 20px 0;
 }
 
 div.dropdown {
-  width: 150px;
+    width: 150px;
 }
 
 .actionBtns {
-  z-index: 10;
-  margin-bottom: -30px;
+    z-index: 10;
+    margin-bottom: -30px;
 }
 
-.dropdown.btn-group > .btn:first-child {
-  width: 100%;
-  background-color: dimgray;
-  color: whitesmoke;
+.dropdown.btn-group>.btn:first-child {
+    width: 100%;
+    background-color: dimgray;
+    color: whitesmoke;
 }
 
 .navbar .container {
-  margin-left: 20px;
+    margin-left: 20px;
 }
 
 .content.container {
-  width: 100%;
+    width: 100%;
 }
 
 .switch-pill {
-  padding-top: 14px;
+    padding-top: 14px;
 }
 
 .switch {
-  display: inline-block;
-  width: 40px;
-  height: 26px;
+    display: inline-block;
+    width: 40px;
+    height: 26px;
 }
 
 .switch-input {
-  display: none;
+    display: none;
 }
 
-.switch-primary .switch-input:checked + .switch-slider {
-  background-color: #15789c;
-  border-color: #3dcafd;
+.switch-primary .switch-input:checked+.switch-slider {
+    background-color: #15789c;
+    border-color: #3dcafd;
 }
 
 .switch-pill .switch-slider {
-  border-radius: 50em;
+    border-radius: 50em;
 }
 
 .switch-slider {
-  position: relative;
-  display: block;
-  height: inherit;
-  cursor: pointer;
-  background-color: #a6a6a6;
-  border: 1px solid #fff;
-  transition: 0.15s ease-out;
-  border-radius: 0.25rem;
+    position: relative;
+    display: block;
+    height: inherit;
+    cursor: pointer;
+    background-color: #a6a6a6;
+    border: 1px solid #fff;
+    transition: 0.15s ease-out;
+    border-radius: 0.25rem;
 }
 
 .switch-pill .switch-slider::before {
-  border-radius: 50em;
+    border-radius: 50em;
 }
 
 .switch-slider::before {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  box-sizing: border-box;
-  width: 20px;
-  height: 20px;
-  content: "";
-  background-color: #fff;
-  border: 1px solid #c8ced3;
-  transition: 0.15s ease-out;
-  border-radius: 0.125rem;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    box-sizing: border-box;
+    width: 20px;
+    height: 20px;
+    content: "";
+    background-color: #fff;
+    border: 1px solid #c8ced3;
+    transition: 0.15s ease-out;
+    border-radius: 0.125rem;
 }
 
-.switch-input:checked + .switch-slider::before {
-  transform: translate3d(14px, 0, 0);
+.switch-input:checked+.switch-slider::before {
+    transform: translate3d(14px, 0, 0);
 }
 
 .switch-slider:disabled {
-  cursor: not-allowed;
+    cursor: not-allowed;
+}
+
+input:disabled+.switch-slider {
+    cursor: not-allowed;
 }
 
 label.switch-label {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 footer {
-  position: relative;
-  bottom: 0;
+    position: relative;
+    bottom: 0;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
