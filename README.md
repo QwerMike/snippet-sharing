@@ -82,9 +82,9 @@ We use Application Insights ([react-appinsights][4]), which provides us with:
 * Exceptions - both server and browser exceptions are reported;
 * Page views and load performance - reported by users' browsers;
 * AJAX calls from web pages - rates, response times, and failure rates;
-+ React-specific metrics:
-* Tracking of router changes;
-* React components usage statistics.
+* React-specific metrics:
+  * Tracking of router changes;
+  * React components usage statistics.
 
 ![ai-app-map](https://raw.githubusercontent.com/QwerMike/snippet-sharing/master/docs/ai_app_map.png)
 ![ai-search](https://raw.githubusercontent.com/QwerMike/snippet-sharing/master/docs/ai_search.png)
