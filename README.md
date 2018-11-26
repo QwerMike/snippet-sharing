@@ -86,4 +86,7 @@ We use Application Insights ([react-appinsights][4]), which provides us with:
 * Tracking of router changes;
 * React components usage statistics.
 
+![ai-app-map](https://raw.githubusercontent.com/QwerMike/snippet-sharing/master/docs/ai_app_map.png)
+![ai-search](https://raw.githubusercontent.com/QwerMike/snippet-sharing/master/docs/ai_search.png)
+
 [4]: https://github.com/Azure/react-appinsights
