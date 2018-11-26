@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
+//import {Redirect} from "react-router-dom";
 import {
   Button,
   ButtonGroup,
@@ -186,6 +187,8 @@ class Editor extends Component {
         privateUid: null,
         publicUid: null
       });
+      this.props.history.push('/');
+
     }
   }
 
@@ -217,9 +220,8 @@ class Editor extends Component {
                 >
                   <Glyphicon glyph="glyphicon glyphicon-floppy-disk" />
                 </Button>
-                <Button bsStyle="danger">
-                  <Glyphicon
-                    onClick={() => this.deleteSnippet(this.state.currentId)}
+                <Button onClick={() => this.deleteSnippet(this.state.currentId)} bsStyle="danger">
+                  <Glyphicon                    
                     glyph="glyphicon glyphicon-remove"
                   />
                 </Button>

@@ -7,6 +7,11 @@ import Wooops from './components/Wooops';
 import "brace/mode/jsx";
 import "brace/ext/language_tools";
 import "brace/ext/searchbox";
+import ReactAI from 'react-appinsights';
+import createHistory from 'history/createBrowserHistory'
+
+const history = createHistory()
+ReactAI.init({instrumentationKey:'17d57d05-6b83-4ed6-a422-25567f1ce658'}, history);
 
 class App extends Component {
   render() {
@@ -34,4 +39,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ReactAI.withTracking(App);
