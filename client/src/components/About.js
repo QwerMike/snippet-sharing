@@ -6,7 +6,7 @@ class About extends Component {
         return (
             <div align='center'>
                 <h1>Snippet Sharing</h1>
-                <Image className='image' src='./snippets-hero-icon.png' alt='snippet share logo' width='200px' height='200px' circle/>
+                <Image className='image' src='/snippets-hero-icon.png' alt='snippet share logo' width='200px' height='200px' circle/>
                 <p>
                     You can paste a text snippet, and then you will get two links.
                 </p>

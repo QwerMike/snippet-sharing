@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AceEditor from "react-ace";
+//import {Redirect} from "react-router-dom";
 import {
   Button,
   ButtonGroup,
@@ -74,8 +75,7 @@ class Editor extends Component {
       highlightActiveLine: true,
       enableSnippets: false,
       showLineNumbers: true,
-      privateUid: "",
-      publicUid: ""
+      currentId: this.props.match.params.id ? this.props.match.params.id : null
     };
 
     this.setTheme = this.setTheme.bind(this);
@@ -83,9 +83,13 @@ class Editor extends Component {
     this.onChange = this.onChange.bind(this);
     this.setFontSize = this.setFontSize.bind(this);
     this.setBoolean = this.setBoolean.bind(this);
+  }
 
+  componentDidMount() {
     const id = this.props.match.params.id;
-    if (id) this.getSnippet(id);
+    if (id) {
+      this.getSnippet(id);
+    }
   }
 
   setMode(e) {
@@ -130,39 +134,59 @@ class Editor extends Component {
     if (response) {
       const privateUid = response.privateUid;
       const publicUid = response.publicUid;
-      this.setState({ privateUid: privateUid, publicLink: publicUid });
+      this.setState({
+        privateUid: privateUid,
+        publicLink: publicUid,
+        currentId: privateUid ? privateUid : publicUid
+      });
+      const obj = this.generateUrls(privateUid, publicUid);
+      alert(`${obj.privateURL}\n${obj.publicURL}`);
     }
   }
 
-  generateUrls() {
-    const { privateUid, publicUid } = this.state;
-    const privateUrl = window.location.href.concat(`/snippet/${privateUid}`);
-    const publicUrl = window.location.href.concat(`/snippet/${publicUid}`);
+  generateUrls(privateUid, publicUid) {
+    const privateUrl = window.location.href.concat(`snippet/${privateUid}`);
+    const publicUrl = window.location.href.concat(`snippet/${publicUid}`);
     return { privateURL: privateUrl, publicURL: publicUrl };
   }
 
   async getSnippet(id) {
     const response = await actions.getSnippetById(id);
-    this.setState = {
+    this.setState({
       value: response.snippet.data,
       mode: response.snippet.type,
       title: response.snippet.title,
       author: response.snippet.author,
-      readOnly: response.readOnly
-    };
+      readOnly: response.readonly
+    });
   }
 
   async deleteSnippet(id) {
-    await actions.deleteSnippet(id);
-    this.setState = {
-      value: defaultValue,
-      mode: "plain_text",
-      title: "",
-      author: "",
-      readOnly: false,
-      privateLink: "",
-      publicLink: ""
+    if (!this.state.readOnly) {
+      await actions.deleteSnippet(id);
+      this.setState({
+        value: defaultValue,
+        mode: "plain_text",
+        title: "",
+        author: "",
+        readOnly: false,
+        privateUid: null,
+        publicUid: null
+      });
+      this.props.history.push('/');
+
+    }
+  }
+
+  async updateSnippet(id) {
+    const { value, mode, author, title } = this.state;
+    const createdSnippet = {
+      data: value,
+      type: mode,
+      title: title,
+      author: author
     };
+    await actions.updateSnippet(id, createdSnippet);
   }
 
   render() {
@@ -170,20 +194,26 @@ class Editor extends Component {
       <Grid className={"content"}>
         <Row>
           <Col xs={12} md={9}>
-            <ButtonToolbar>
+            <ButtonToolbar hidden={this.state.readOnly}>
               <ButtonGroup bsSize="small" className="actionBtns pull-right">
-                <Button bsStyle="info">
+                <Button onClick={() => this.createSnippet()} bsStyle="info">
                   <Glyphicon glyph="glyphicon glyphicon-share-alt" />
                 </Button>
-                <Button bsStyle="primary">
+                <Button
+                  onClick={() => this.updateSnippet(this.state.currentId)}
+                  bsStyle="primary"
+                >
                   <Glyphicon glyph="glyphicon glyphicon-floppy-disk" />
                 </Button>
-                <Button bsStyle="danger">
-                  <Glyphicon glyph="glyphicon glyphicon-remove" />
+                <Button onClick={() => this.deleteSnippet(this.state.currentId)} bsStyle="danger">
+                  <Glyphicon                    
+                    glyph="glyphicon glyphicon-remove"
+                  />
                 </Button>
               </ButtonGroup>
             </ButtonToolbar>
             <AceEditor
+              readOnly={this.state.readOnly}
               mode={this.state.mode}
               theme={this.state.theme}
               onChange={this.onChange}
@@ -261,6 +291,7 @@ class Editor extends Component {
                 <span>
                   <label className="switch switch-pill switch-primary">
                     <input
+                    disabled = {this.state.readOnly}
                       type="checkbox"
                       className="switch-input"
                       checked={this.state.enableLiveAutocompletion}
@@ -285,6 +316,7 @@ class Editor extends Component {
                 <span>
                   <label className="switch switch-pill switch-primary">
                     <input
+                    disabled = {this.state.readOnly}
                       type="checkbox"
                       className="switch-input"
                       checked={this.state.enableSnippets}

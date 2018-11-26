@@ -11,7 +11,7 @@ class Navigation extends Component {
             <Link to="/">
               <span>
                 <img
-                  src="./snippets-hero-icon.png"
+                  src="/snippets-hero-icon.png"
                   alt="snippet share logo"
                   width="30px"
                   height="30px"

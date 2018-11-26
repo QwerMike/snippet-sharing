@@ -37,7 +37,7 @@ export const deleteSnippet = async id => {
 export const updateSnippet = async (id, obj) => {
   try {
     const response = await axios.put(
-      `https://snippet-sharing.firebaseio.com/snippets/${id}`,
+      `https://us-central1-snippet-sharing.cloudfunctions.net/updateSnippet?id=${id}`,
       obj
     );
     return response.data;
