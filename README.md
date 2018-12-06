@@ -19,7 +19,22 @@ The second link grants only read-only access.
 [2]: https://github.com/QwerMike/dr-guess/blob/master/docs/architecture.md
 [3]: https://github.com/QwerMike/dr-guess/blob/master/docs/solid-compliant.md
 
+## API Endpoints
+
+TBD: Add request and response info
+
+`POST /createSnippet`
+
+`GET /getSnippet`
+
+`DELETE /deleteSnippet`
+
+`PUT /updateSnippet`
+
 ## Storage
+
+TBD: Add model, json sample
+
 For storage we use Firebase Realtime Database, which:
 * is cloud-hosted;
 * NoSQL;
