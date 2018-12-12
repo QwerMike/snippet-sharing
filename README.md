@@ -6,9 +6,13 @@
 *Snippet Sharing is a service for sharing code/text snippets. It allows you to paste a text snippet, and then you can share the link to it with somebody.*
 
 ## Info
-You can paste a text snippet, and then you will get two links.  
-First link allows you to modify and delete the snippet.  
-The second link grants only read-only access.
+1) You paste a text/code snippet you want to share.
+2) Then you publish it and will get two links:
+    - first is for update/delete access
+    - second is only for read access
+3) Send the appropriate link to the person you want.
+
+*NOTE: It's your responsibility to save the link with update/delete access if you want to make changes later.* 
 
 ## Links
 - [Functional specifications][1]
