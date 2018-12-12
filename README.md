@@ -21,8 +21,6 @@ The second link grants only read-only access.
 
 ## API Endpoints
 
-TBD: Add request and response info
-
 ### `POST /createSnippet`
 Request body: 
 ```Javascript
@@ -43,6 +41,7 @@ Responses:
 { message: 'Send a POST request.' }
 ```
 
+---
 ### `GET /getSnippet`
 Query params: `id`
 
@@ -73,6 +72,7 @@ Responses:
 { message: 'Send a GET request.' }
 ```
 
+---
 ### `DELETE /deleteSnippet`
 Query params: `id`
 
@@ -95,6 +95,7 @@ Responses:
 { message: 'Send a DELETE request.' }
 ```
 
+---
 ### `PUT /updateSnippet`
 Query params: `id`
 
