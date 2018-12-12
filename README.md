@@ -23,13 +23,103 @@ The second link grants only read-only access.
 
 TBD: Add request and response info
 
-`POST /createSnippet`
+### `POST /createSnippet`
+Request body: 
+```Javascript
+{ author: String, title: String, data: String, type: String }
+```
 
-`GET /getSnippet`
+Responses:
+- 200 OK
+```Javascript
+{ privateUid: String, publicUid: String }
+```
+- 400 Bad Request
+```Javascript
+{ message: 'Property "data" is required.' }
+```
+- 405 Method Not Allowed
+```Javascript
+{ message: 'Send a POST request.' }
+```
 
-`DELETE /deleteSnippet`
+### `GET /getSnippet`
+Query params: `id`
 
-`PUT /updateSnippet`
+Responses:
+- 200 OK 
+```Javascript
+{
+  snippet: {
+    author: String,
+    title: String,
+    data: String,
+    type: String,
+    publicUid: String 
+  },
+  readonly: Boolean
+}
+```
+- 400 Bad Request
+```Javascript
+{ message: 'Search parameter "id" is required.' }
+```
+- 404 Not Found
+```Javascript
+{ message: 'Snippet ${id} is not found.' }
+```
+- 405 Method Not Allowed
+```Javascript
+{ message: 'Send a GET request.' }
+```
+
+### `DELETE /deleteSnippet`
+Query params: `id`
+
+Request body: 
+```Javascript
+{ author: String, title: String, data: String, type: String }
+```
+
+Responses:
+- 200 OK
+```Javascript
+{ message: 'Snippet ${id} is successfully deleted.' }
+```
+- 400 Bad Request
+```Javascript
+{ message: 'Search parameter "id" is required.' }
+```
+- 405 Method Not Allowed
+```Javascript
+{ message: 'Send a DELETE request.' }
+```
+
+### `PUT /updateSnippet`
+Query params: `id`
+
+Request body:
+```Javascript
+{ author: String, title: String, data: String, type: String }
+```
+
+Responses:  
+- 200 OK
+```Javascript
+{ message: 'Successfully updated snippet ${id}.' }
+```
+- 400 Bad Request
+```Javascript
+{ message: 'Search parameter "id" is required.' }
+```
+- 400 Bad Request
+```Javascript
+{ message: 'Property "data" is required.' }
+```
+- 405 Method Not Allowed
+```Javascript
+{ message: 'Send a PUT request.' }
+```
 
 ## Storage
 
