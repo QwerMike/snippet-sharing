@@ -124,16 +124,13 @@ Responses:
 
 ## Storage
 
-TBD: Add model, json sample
-
-For storage we use Firebase Realtime Database, which:
+As storage we use Firebase Realtime Database, which:
 * is cloud-hosted;
 * NoSQL;
 * always up-to-date, as data is synced across all clients in realtime;
 * remains available even if the app goes offline;
 * is available from client devices - can be accessed directly from a mobile device or web browser;
-* has data validation through the Firebase Realtime Database Security Rules on r/w operations;
-* scales across multiple database instances.
+* has data validation through the Firebase Realtime Database Security Rules on r/w operations.
 
 We store snippets, which have:
 * data - text or code, which cannot be empty;
@@ -142,6 +139,39 @@ We store snippets, which have:
 * type - the type of text or code set by the author (currently supports most popular programming and markup languages);
 * public_id - unique identifier, which grants view-only access to the snippet;
 * private_id - unique identifier, which grants full access to the snippet.
+
+Also we have redundant proxy object for the sake of convenient data processing in cloud functions.
+![db-diagram](https://raw.githubusercontent.com/QwerMike/snippet-sharing/master/docs/db-diagram.png)
+
+For example, the database has the following look (basically, it's JSON file):
+```JSON
+{
+  "readonlyProxy" : {
+    "-LTZRmZk06r6qVYxt73S" : {
+      "snippet" : "-LTZRmZj9w0HFukFMlNd"
+    },
+    "-LTZUkkE_LDHaFs7UG1s" : {
+      "snippet" : "-LTZUkkDVRQeS3LeXt9K"
+    }
+  },
+  "snippets" : {
+    "-LTZRmZj9w0HFukFMlNd" : {
+      "author" : "John Wick",
+      "data" : "next target -> you",
+      "publicUid" : "-LTZRmZk06r6qVYxt73S",
+      "title" : "You better watch out",
+      "type" : "plain_text"
+    },
+    "-LTZUkkDVRQeS3LeXt9K" : {
+      "author" : "Pewds",
+      "data" : "alert('Subscribe to PewDiePie')",
+      "publicUid" : "-LTZUkkE_LDHaFs7UG1s",
+      "title" : "#SubToPewds",
+      "type" : "javascript"
+    }
+  }
+}
+```
 
 ## Resiliency
 There are four endpoints in the API, conforming to basic CRUD operations.
