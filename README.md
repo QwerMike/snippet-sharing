@@ -237,8 +237,11 @@ A **"Service Credit"** is a dollar credit, calculated as set forth below, that w
 |       95% to < 99%        |                           25%                    |
 |              < 95%        |                           50%                    |
 
-## Monitoring
-Monitoring results cannot be found [here](https://github.com/QwerMike/dr-guess/blob/master/docs/monitoring).
+## Monitoring & Telemetry
+Model:
+![Model](https://github.com/QwerMike/dr-guess/blob/master/docs/telemetry&monitoring-model.png)
+
+Monitoring & telemerty results can be found [here](https://github.com/QwerMike/dr-guess/blob/master/docs/monitoring-telemetry).
 Firebase has built-in tools for basic monitoring of:
 - Crashes;
 - Connections (realtime & overall history);
@@ -257,7 +260,6 @@ They provide metrics for:
 - Hosting;
 - Cloud Functions.
 
-## Telemetry
 We use Application Insights ([react-appinsights][4]), which provides us with:
 * Request rates, response times, and failure rates - which pages are most popular, at what times of day, see which pages perform best;
 * Dependency rates, response times, and failure rates - check if external services are slowing down our app;
