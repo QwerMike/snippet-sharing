@@ -7,8 +7,6 @@ import {
   MenuItem
 } from "react-bootstrap";
 
-import Preferences from './Preferences';
-
 const languages = [
     "javascript",
     "java",
@@ -49,9 +47,6 @@ themes.forEach(theme => {
 });
 
 const Settings = ({readOnly, settings, setSettings}) => {
-
-    const handleChange = event => setSettings(event.target.name, event.target.value);
-
     return (
         <div className='Settings'>
             <div>

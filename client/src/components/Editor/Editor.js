@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import AceEditor from "react-ace";
 import {
   Button,
@@ -7,24 +7,24 @@ import {
   Row,
   Col,
   Glyphicon,
-  ButtonToolbar,
-  Modal
+  ButtonToolbar
 } from "react-bootstrap";
 
 import Settings from './Settings';
 import Preferences from './Preferences';
+import Links from '../Links'
 import * as actions from "../../apiQueries";
 
 const defaultValue = `Enter text here...`;
 
-class Editor extends Component {
+class Editor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       readOnly: props.readOnly || false,
       value: defaultValue,
       settings: new Preferences(),
-      currentId: this.props.match.params.id ? this.props.match.params.id : null,
+      currentId: this.props.match.params.id || null,
       show: false
     };
   }
@@ -32,7 +32,13 @@ class Editor extends Component {
   componentDidMount() {
     const id = this.props.match.params.id;
     if (id) {
-      this.getSnippet(id);
+      this.loadSnippet(id);
+    }
+    else {
+      this.setState({
+        value: defaultValue,
+        readOnly: false
+      });
     }
   }
 
@@ -48,23 +54,14 @@ class Editor extends Component {
     });
   }
 
-  // setMode = (mode) => {
-  //   this.setState({
-  //     settings: {...this.state.settings, mode: mode}
-  //   });
-  // }
+  hideModal= () => {
+    this.setState({ show: false });
+  }
 
-  // setTheme = (theme) => {
-  //   this.setState({
-  //     settings: {...this.state.settings, theme: theme}
-  //   });
-  // }
-
-  // setFontSize = (size) => {
-  //   this.setState({
-  //     settings: {...this.state.settings, fontSize: parseInt(size, 10)}
-  //   });
-  // }
+  generateUrl(Uid) {
+    const url = window.location.host.concat(`/snippet/${Uid}`);
+    return url;
+  }
 
   async createSnippet() {
     if (!this.state.currentId) {
@@ -86,6 +83,7 @@ class Editor extends Component {
         });
       }
     }
+
     this.setState({
       privateUid: this.state.privateUid,
       publicLink: this.state.publicLink,
@@ -93,16 +91,7 @@ class Editor extends Component {
     })
   }
 
-  handleHide() {
-    this.setState({ show: false });
-  }
-
-  generateUrl(Uid) {
-    const url = window.location.host.concat(`/snippet/${Uid}`);
-    return url;
-  }
-
-  async getSnippet(id) {
+  async loadSnippet(id) {
     const response = await actions.getSnippetById(id);
     this.setState({
       value: response.snippet.data,
@@ -134,10 +123,10 @@ class Editor extends Component {
   }
 
   async updateSnippet(id) {
-    const { value, mode, author, title } = this.state;
+    const { value, settings, author, title } = this.state;
     const createdSnippet = {
       data: value,
-      type: mode,
+      type: settings.mode,
       title: title,
       author: author
     };
@@ -193,108 +182,16 @@ class Editor extends Component {
                 settings={this.state.settings}
                 setSettings={this.setSettings} 
               />
-              {/* <div>
-                <h2>Settings</h2>
-              </div>
-              <div className="field">
-                <label>Language:</label>
-                <div className="control">
-                  <DropdownButton
-                    id="lanuage"
-                    title={this.state.mode}
-                    onSelect={this.setMode}
-                  >
-                    {languages.map(lang => (
-                      <MenuItem eventKey={lang} key={lang} value={lang}>
-                        {lang}
-                      </MenuItem>
-                    ))}
-                  </DropdownButton>
-                </div>
-              </div>
-
-              <div className="field">
-                <label>Theme:</label>
-                <div className="control">
-                  <DropdownButton
-                    id="theme"
-                    title={this.state.theme}
-                    onSelect={this.setTheme}
-                  >
-                    {themes.map(theme => (
-                      <MenuItem eventKey={theme} key={theme} value={theme}>
-                        {theme}
-                      </MenuItem>
-                    ))}
-                  </DropdownButton>
-                </div>
-              </div>
-
-              <div className="field">
-                <label>Font Size:</label>
-                <div className="control">
-                  <DropdownButton
-                    id="fontSize"
-                    title={this.state.fontSize}
-                    onSelect={this.setFontSize}
-                  >
-                    {[14, 16, 18, 20, 24, 28, 32, 40].map(font => (
-                      <MenuItem eventKey={font} key={font} value={font}>
-                        {font}
-                      </MenuItem>
-                    ))}
-                  </DropdownButton>
-                </div>
-              </div>
-
-              <div className="field">
-                <div className="control">
-                  <span>
-                    <label className="switch switch-pill switch-primary">
-                      <input
-                        disabled={this.state.readOnly}
-                        type="checkbox"
-                        className="switch-input"
-                        checked={this.state.enableLiveAutocompletion}
-                        onChange={e =>
-                          this.setBoolean(
-                            "enableLiveAutocompletion",
-                            e.target.checked
-                          )
-                        }
-                      />
-                      <span className={"switch-slider"} />
-                    </label>
-                  </span>
-                  <label className={"switch-label"}>
-                    Enable Live Autocomplete
-                </label>
-                </div>
-              </div>
-
-              <div className="field">
-                <div className="control">
-                  <span>
-                    <label className="switch switch-pill switch-primary">
-                      <input
-                        disabled={this.state.readOnly}
-                        type="checkbox"
-                        className="switch-input"
-                        checked={this.state.enableSnippets}
-                        onChange={e =>
-                          this.setBoolean("enableSnippets", e.target.checked)
-                        }
-                      />
-                      <span className={"switch-slider"} />
-                    </label>
-                  </span>
-                  <label className={"switch-label"}>Enable Snippets</label>
-                </div>
-              </div> */}
             </Col>
           </Row>
         </Grid>
-        <Modal
+        <Links 
+        show={this.state.show}
+        privateLink={this.generateUrl(this.state.privateUid)}
+        publicLink={this.generateUrl(this.state.publicLink)}
+        hide={this.hideModal}
+         />
+        {/* <Modal
           show={this.state.show}
           onHide={() => this.handleHide()}
           container={this}
@@ -319,7 +216,7 @@ class Editor extends Component {
           <Modal.Footer>
             <Button onClick={() => this.handleHide()}>Close</Button>
           </Modal.Footer>
-        </Modal>
+        </Modal> */}
       </div>
     );
   }
