@@ -31,7 +31,7 @@ class App extends Component {
             <nav>
               <ul />
             </nav>
-            <div>© 2018 SnippetShare.org</div>
+            <div>© 2019 SnippetShare.org</div>
           </footer>
         </div>
       </Router>
