@@ -18,10 +18,12 @@
 - [Functional specifications][1]
 - [Architecture][2]
 - [SOLID compliant][3]
+- [Clickable Prototype][4]
 
 [1]: https://github.com/QwerMike/dr-guess/blob/master/docs/func-spec-uml.svg
 [2]: https://github.com/QwerMike/dr-guess/blob/master/docs/architecture.md
 [3]: https://github.com/QwerMike/dr-guess/blob/master/docs/solid-compliant.md
+[4]: https://invis.io/D7RFJO33GX9#/356907043_Main
 
 ## API Endpoints
 
