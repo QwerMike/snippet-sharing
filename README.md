@@ -5,6 +5,17 @@
 
 *Snippet Sharing is a service for sharing code/text snippets. It allows you to paste a text snippet, and then you can share the link to it with somebody.*
 
+
+|     Firebase functions    |           Client          |
+| ------------------------- |:-------------------------:|
+| [![Build Status][fb]][fp] | [![Build Status][cb]][cp] |
+
+[fb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-functions-ci?branchName=master
+[fp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=3&branchName=master
+[cb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-client-ci?branchName=master
+[cp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=2&branchName=master
+
+
 ## Info
 1) You paste a text/code snippet you want to share.
 2) Then you publish it and will get two links:
