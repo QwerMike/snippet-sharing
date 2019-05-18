@@ -1,0 +1,3 @@
+[submodule "tests"]
+	path = tests
+	url = https://github.com/YaroslavKormushyn/snippet-share-automated-tests.git
