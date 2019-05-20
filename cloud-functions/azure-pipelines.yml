@@ -28,21 +28,12 @@ steps:
 
 - task: CopyFiles@2
   inputs:
-    sourceFolder: '$(Build.SourcesDirectory)/cloud-functions/functions/lib'
-    contents: '**'
-    targetFolder: $(Build.ArtifactStagingDirectory)/functions
-
-- task: CopyFiles@2
-  inputs:
-    sourceFolder: '$(Build.SourcesDirectory)/cloud-functions/functions'
-    contents: 'package.json'
-    targetFolder: $(Build.ArtifactStagingDirectory)/functions
-
-- task: CopyFiles@2
-  inputs:
     sourceFolder: '$(Build.SourcesDirectory)/cloud-functions'
-    contents: 'firebase.json'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    contents: |
+     functions/lib/**
+     functions/package.json
+     firebase.json
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
