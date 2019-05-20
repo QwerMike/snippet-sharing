@@ -27,5 +27,10 @@ steps:
   displayName: 'npm install and build'
 
 - script: 
-    npm test
-  displayName: 'Running unit tests...'
+    npm run test
+  displayName: 'Run unit tests'
+
+- task: PublishBuildArtifacts@1    
+  displayName: 'Publish Artifact: clientdrop'
+  inputs:
+    PathtoPublish: '$(Build.SourcesDirectory)/client/build'
