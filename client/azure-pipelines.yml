@@ -32,10 +32,10 @@ steps:
   displayName: 'Run unit tests'
 
 - task: CopyFiles@2
-inputs:
-  sourceFolder: '$(Build.SourcesDirectory)/client/build'
-  contents: '**'
-  targetFolder: $(Build.ArtifactStagingDirectory)
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)/client/build'
+    contents: '**'
+    targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
