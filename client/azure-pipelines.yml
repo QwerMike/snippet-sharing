@@ -27,6 +27,7 @@ steps:
   displayName: 'npm install and build'
 
 - script: 
+    cd client
     npm run test
   displayName: 'Run unit tests'
 
