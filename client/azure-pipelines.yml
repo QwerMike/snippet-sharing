@@ -31,7 +31,13 @@ steps:
     npm run test
   displayName: 'Run unit tests'
 
+- task: CopyFiles@2
+inputs:
+  sourceFolder: '$(Build.SourcesDirectory)/client/build'
+  contents: '**'
+  targetFolder: $(Build.ArtifactStagingDirectory)
+
 - task: PublishBuildArtifacts@1    
-  displayName: 'Publish Artifact: clientdrop'
+  displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/client/build'
+    PathtoPublish: '$(Build.SourcesDirectory)'
