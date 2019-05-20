@@ -1,7 +1,7 @@
 {
   "functions": {
     "predeploy": [
-      "npm --prefix \"%RESOURCE_DIR%\" install"
+      "npm --prefix ./functions install"
     ],
     "source": "functions"
   },
