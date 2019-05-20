@@ -30,7 +30,7 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)/cloud-functions/functions/lib'
     contents: '**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    targetFolder: $(Build.ArtifactStagingDirectory)/functions
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
