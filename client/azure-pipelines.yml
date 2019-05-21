@@ -35,9 +35,15 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)/client/build'
     contents: '**'
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    targetFolder: '$(Build.ArtifactStagingDirectory)/public'
+
+- task: CopyFiles@2
+  inputs:
+    sourceFolder: '$(Build.SourcesDirectory)/cloud-functions'
+    contents: 'firebase.json'
+    targetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishBuildArtifacts@1    
   displayName: 'Publish Artifact: drop'
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/client/build'
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'

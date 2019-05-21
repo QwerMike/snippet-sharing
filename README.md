@@ -7,13 +7,18 @@
 
 
 |     Firebase functions    |           Client          |
-| ------------------------- |:-------------------------:|
+|:-------------------------:|:-------------------------:|
 | [![Build Status][fb]][fp] | [![Build Status][cb]][cp] |
+| [![Deployment][fdb]][fdp] | [![Deployment][cdb]][cdp] |
 
 [fb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-functions-ci?branchName=master
 [fp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=3&branchName=master
 [cb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-client-ci?branchName=master
 [cp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=2&branchName=master
+[fdb]: https://vsrm.dev.azure.com/tmikent/_apis/public/Release/badge/fe89bfae-ea9c-4908-8852-906d5ebc763f/1/2
+[fdp]: https://dev.azure.com/tmikent/snippet-sharing/_release?definitionId=1
+[cdb]: https://vsrm.dev.azure.com/tmikent/_apis/public/Release/badge/fe89bfae-ea9c-4908-8852-906d5ebc763f/2/3
+[cdp]: https://dev.azure.com/tmikent/snippet-sharing/_release?definitionId=2
 
 
 ## Info
