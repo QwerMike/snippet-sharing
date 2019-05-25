@@ -6,10 +6,10 @@
 *Snippet Sharing is a service for sharing code/text snippets. It allows you to paste a text snippet, and then you can share the link to it with somebody.*
 
 
-|     Firebase functions    |           Client          |
-|:-------------------------:|:-------------------------:|
-| [![Build Status][fb]][fp] | [![Build Status][cb]][cp] |
-| [![Deployment][fdb]][fdp] | [![Deployment][cdb]][cdp] |
+|     Firebase functions    |           Client          |          Automated Tests        |
+|:-------------------------:|:-------------------------:|:-------------------------------:|
+| [![Build Status][fb]][fp] | [![Build Status][cb]][cp] | [![Build Status][autob]][autop] |
+| [![Deployment][fdb]][fdp] | [![Deployment][cdb]][cdp] |                                 |
 
 [fb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-functions-ci?branchName=master
 [fp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=3&branchName=master
@@ -19,6 +19,8 @@
 [fdp]: https://dev.azure.com/tmikent/snippet-sharing/_release?definitionId=1
 [cdb]: https://vsrm.dev.azure.com/tmikent/_apis/public/Release/badge/fe89bfae-ea9c-4908-8852-906d5ebc763f/2/3
 [cdp]: https://dev.azure.com/tmikent/snippet-sharing/_release?definitionId=2
+[autob]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-share-automated-tests?branchName=master
+[autop]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=5&branchName=master
 
 
 ## Info
