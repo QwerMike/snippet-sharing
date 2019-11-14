@@ -9,7 +9,6 @@
 |     Firebase functions    |           Client          |          Automated Tests        |
 |:-------------------------:|:-------------------------:|:-------------------------------:|
 | [![Build Status][fb]][fp] | [![Build Status][cb]][cp] | [![Build Status][autob]][autop] |
-| [![Deployment][fdb]][fdp] | [![Deployment][cdb]][cdp] |                                 |
 
 [fb]: https://dev.azure.com/tmikent/snippet-sharing/_apis/build/status/snippet-sharing-functions-ci?branchName=master
 [fp]: https://dev.azure.com/tmikent/snippet-sharing/_build/latest?definitionId=3&branchName=master
